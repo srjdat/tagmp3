@@ -13,7 +13,7 @@ Getting customized local files to show up correctly on Spotify (with the right a
 
 ## Setup
 
-1. Create a folder named `spotify local music` on your Desktop. Update the path in the program (`FILE_PATH` or equivalent variable) to point to this folder.
+1. Create a folder named `spotify local music` on your Desktop. Update the path in the program (change `user` to your local username and keep `{input_tokens[0]}.mp3` at the end) to point to this folder.
 2. Make sure Spotify is set to show local files from this folder:
    - Go to **Settings → Local Files**
    - Toggle **Show Local Files** on
