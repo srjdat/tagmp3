@@ -80,7 +80,7 @@ def main():
     )
     audiofile.tag.save()
 
-    os.replace(input_tokens[5], f"/home/srjdat/Desktop/spotify local music/{input_tokens[0]}.mp3")
+    os.replace(input_tokens[5], f"/home/{user}/Desktop/spotify local music/{input_tokens[0]}.mp3")
 
 if __name__ == "__main__": 
     main()
