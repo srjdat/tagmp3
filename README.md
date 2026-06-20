@@ -43,7 +43,8 @@ export PATH="$HOME/.local/bin:$PATH"
 ## Usage
 
 ```bash
-tagmp3 "Artist" "Album" "Album Artist" "path/to/cover.jpg" "YouTube link"
+tagmp3
+> "Artist" "Album" "Album Artist" "path/to/cover.jpg" "YouTube link"
 ```
 
 **Arguments (in order):**
