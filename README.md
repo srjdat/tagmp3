@@ -38,7 +38,7 @@ Title Artist Album Album_Artist Front_Cover Youtube_Link
 After running `tagmp3` a GUI will pop up asking for Title, Artist, Album, Cover, Youtube Link, and Destination folder.   
 Cover and Destination will give you the abilitiy to choose your own through a dialog box (click select button to access the dialog box). 
 
-![GUI Image](images/image.png)   
+![GUI Image](images/gui-image.png)   
 Enter all the fields freely with no need to worry about quotes
 
 ## After running
