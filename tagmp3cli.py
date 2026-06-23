@@ -7,11 +7,11 @@ import os, shutil
 
 # make it global at the beginning
 filepath = os.path.abspath(__file__)
-
 if not os.path.exists(os.path.expanduser("~/.local/bin/tagmp3")):
     os.chmod(path=filepath, mode=0o755)
     shutil.copy(filepath, os.path.expanduser("~/.local/bin/tagmp3"))
 
+# downloads the audio from the link 
 def download_audio(url, output_dir="Downloads"): 
     yt_dlp_opts = {
                 'format': 'bestaudio/best',
@@ -89,6 +89,8 @@ def main():
     )
     audiofile.tag.save()
 
+    # automatically moves it to the folder where we want it 
+    # made everything be in variables to make it easier to change later
     format = ".mp3"
     final_dest = os.path.join(destination_input, input_tokens[0] + format)
     os.replace(input_tokens[5], final_dest)
