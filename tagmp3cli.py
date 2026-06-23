@@ -25,6 +25,8 @@ def download_audio(url, output_dir="Downloads"):
     return final_path
 
 def main(): 
+    print("Destination folder")
+    destination_input = input("> ")
     print("Title Artist Album Album_Artist Front_Cover Youtube_Link")
     user_input = input("> ")
     input_tokens = []
@@ -80,7 +82,9 @@ def main():
     )
     audiofile.tag.save()
 
-    os.replace(input_tokens[5], f"/home/{user}/Desktop/spotify local music/{input_tokens[0]}.mp3")
+    format = ".mp3"
+    final_dest = os.path.join(destination_input, input_tokens[0] + format)
+    os.replace(input_tokens[5], final_dest)
 
 if __name__ == "__main__": 
     main()
