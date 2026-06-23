@@ -3,7 +3,17 @@
 import yt_dlp
 import eyed3
 from eyed3.id3.frames import ImageFrame
-import os
+import os, shutil
+
+# make it global at the beginning
+filepath = os.path.abspath(__file__)
+
+if not os.path.exists(os.path.expanduser("~/.local/bin/tagmp3")):
+    os.chmod(path=filepath, mode=0o755)
+    shutil.copy(filepath, os.path.expanduser("~/.local/bin/tagmp3"))
+else: 
+    print("tagmp3 already exists")
+
 
 def download_audio(url, output_dir="Downloads"): 
     yt_dlp_opts = {

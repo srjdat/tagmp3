@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-
+import os, shutil
 from pathlib import Path
 import tkinter as tkr
 from tkinter import ttk
@@ -9,8 +9,15 @@ import eyed3
 from eyed3.id3.frames import ImageFrame
 import os
 
-root = tkr.Tk()
-title_str, artist_str, cover_str, album_str, link_str, dest_str = tkr.StringVar(), tkr.StringVar(), tkr.StringVar(), tkr.StringVar(), tkr.StringVar(), tkr.StringVar()
+# make it global at the beginning
+filepath = os.path.abspath(__file__)
+
+if not os.path.exists(os.path.expanduser("~/.local/bin/tagmp3")):
+    os.chmod(path=filepath, mode=0o755)
+    shutil.copy(filepath, os.path.expanduser("~/.local/bin/tagmp3"))
+else: 
+    print("tagmp3 already exists")
+
 
 def enter_command(): 
     # end the gui cause we're done and all the tags are stored in global variables 
@@ -26,7 +33,7 @@ def select_destination_file():
 
 def download_audio(url, output_dir="Downloads"): 
     yt_dlp_opts = {
-                'format': 'bestaudio/best',
+        'format': 'bestaudio/best',
         'outtmpl': f'{output_dir}/%(title)s.%(ext)s',
         'postprocessors': [{
             'key': 'FFmpegExtractAudio',
@@ -45,9 +52,11 @@ def download_audio(url, output_dir="Downloads"):
 
 def gui(): 
     # gui
+    global root
+    root = tkr.Tk()
     root.title("tagmp3")
     root.geometry('510x340')
-
+    
     frame1 = ttk.Frame(root)
     frame1.grid(row=3, column=1)
     frame1.columnconfigure(0, weight=1)
@@ -59,6 +68,8 @@ def gui():
     # all global variables cause i will be accessing these elsewhere
     global title_str, album_str, artist_str, cover_str, link_str, dest_str
     global title, album, artist, front_cover, link, destination
+
+    title_str, artist_str, cover_str, album_str, link_str, dest_str = tkr.StringVar(), tkr.StringVar(), tkr.StringVar(), tkr.StringVar(), tkr.StringVar(), tkr.StringVar()
 
     # song title
     ttk.Label(root, text="Title").grid(row=0, column=0, padx=15, pady=(6, 3))
