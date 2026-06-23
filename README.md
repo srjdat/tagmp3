@@ -36,12 +36,12 @@ Title Artist Album Album_Artist Front_Cover Youtube_Link
 After running `tagmp3` a GUI will pop up asking for Title, Artist, Album, Cover, Youtube Link, and Destination folder.   
 Cover and Destination will give you the abilitiy to choose your own through a dialog box (click select button to access the dialog box). 
 
-![Enter all the fields freely with no need to worry about quotes](image.png)
+![Enter all the fields freely with no need to worry about quotes](images/image.png)
 
 ## After running
 Go to Spotify settings and turn off and on the folder that you are using for local files. 
 
-![Turn this off and on](image-1.png)
+![Turn this off and on](images/image-1.png)
 
 Your newly tagged track should appear with the correct metadata!
 
