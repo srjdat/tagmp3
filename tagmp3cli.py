@@ -4,17 +4,19 @@ import yt_dlp
 import eyed3
 from eyed3.id3.frames import ImageFrame
 import os, shutil
-
-# make it global at the beginning
-filepath = os.path.abspath(__file__)
-if not os.path.exists(os.path.expanduser("~/.local/bin/tagmp3")):
-    os.chmod(path=filepath, mode=0o755)
-    shutil.copy(filepath, os.path.expanduser("~/.local/bin/tagmp3"))
+import sys
+# Cross platform path operations
+from pathlib import Path
+# Cross platform temp directory
+import tempfile
+# Fixes arrow keys not working in input()
+import readline
 
 # downloads the audio from the link 
-def download_audio(url, output_dir="Downloads"): 
+def download_audio(url): 
+    output_dir = tempfile.gettempdir()
     yt_dlp_opts = {
-                'format': 'bestaudio/best',
+        'format': 'bestaudio/best',
         'outtmpl': f'{output_dir}/%(title)s.%(ext)s',
         'postprocessors': [{
             'key': 'FFmpegExtractAudio',
@@ -26,26 +28,23 @@ def download_audio(url, output_dir="Downloads"):
     with yt_dlp.YoutubeDL(yt_dlp_opts) as ydl: 
         info = ydl.extract_info(url, download=True)
         filepath = ydl.prepare_filename(info)
-        base, _ = filepath.rsplit('.', 1)
-        final_path = f'{base}.mp3'
+        base = Path(filepath).stem
+        final_path = Path(output_dir) / f'{base}.mp3'
 
     return final_path
 
-def main(): 
+def prompt_input():
     print("Destination folder")
     destination_input = input("> ")
     print("Title Artist Album Album_Artist Front_Cover Youtube_Link")
     user_input = input("> ")
+
     input_tokens = []
     input_tokenizer = ""
     quote = False
-    user_input_length = len(user_input)
-    count = 0  # using this to determine where we are in user input
 
     # loop through the string
     for i in user_input:
-        count += 1  # increment counter
-
         # check if the letter is a quote
         if i == "\"":
             quote = not quote  # if the letter is a quote we don't want to add it to the tokenizer
@@ -58,13 +57,19 @@ def main():
         else:  # not in quote mode, not a quote, not a space, random character
             input_tokenizer += i
 
-        # end of user input
-        if count == user_input_length:
-            input_tokens.append(input_tokenizer)  # add current token into the tokensarray
-            input_tokenizer = ""  # clear tokenizer
-            break  # break out of the loop
+    input_tokens.append(input_tokenizer)  # add current token into the tokensarray
+    input_tokenizer = ""  # clear tokenizer
 
-    
+    return destination_input, input_tokens
+
+def main(): 
+    # Prompt for input if the user passes no arguments via shell
+    if len(sys.argv) > 7:
+        destination_input = sys.argv[1]
+        input_tokens = sys.argv[2:]
+    else:
+        destination_input, input_tokens = prompt_input()
+
     input_tokens[5] = download_audio(input_tokens[5])
 
     # artist, album, album_artist, front_cover, file path
@@ -81,6 +86,7 @@ def main():
     # get image for front cover first
     with open(input_tokens[4], "rb") as image_file:
         imagedata = image_file.read()
+
     audiofile.tag.images.set(
         ImageFrame.FRONT_COVER,
         imagedata,
@@ -91,9 +97,12 @@ def main():
 
     # automatically moves it to the folder where we want it 
     # made everything be in variables to make it easier to change later
-    format = ".mp3"
-    final_dest = os.path.join(destination_input, input_tokens[0] + format)
-    os.replace(input_tokens[5], final_dest)
+    file_format = "mp3"
+    final_dest = Path(destination_input) / f'{input_tokens[0]}.{file_format}' 
+    shutil.move(input_tokens[5], final_dest)
 
 if __name__ == "__main__": 
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        print("\nProcess interrupted by user, exiting...")
