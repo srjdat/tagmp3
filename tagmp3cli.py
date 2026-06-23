@@ -11,8 +11,6 @@ filepath = os.path.abspath(__file__)
 if not os.path.exists(os.path.expanduser("~/.local/bin/tagmp3")):
     os.chmod(path=filepath, mode=0o755)
     shutil.copy(filepath, os.path.expanduser("~/.local/bin/tagmp3"))
-else: 
-    print("tagmp3 already exists")
 
 def download_audio(url, output_dir="Downloads"): 
     yt_dlp_opts = {
