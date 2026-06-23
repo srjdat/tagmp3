@@ -1,3 +1,5 @@
+#### Currently this is geared towards MacOS and Linux, I may or may not work on Windows, but it is easy to manually update these tags on Windows. 
+
 # Spotify Local File Tagger
 
 ## What it does
@@ -49,5 +51,3 @@ Your newly tagged track should appear with the correct metadata!
 - Spotify sometimes doesn't show the cover art reliably on Linux
    - This issue isn't a fault of the program, Linux doesn't have the best support for everything
 - Sometimes it will require you to turn on and off the source folder or local files in general a couple of times before this works (this is just how Spotify is). 
-- Currently this is geared towards MacOS and Linux, I may or may not work on Windows 
-   - It is possible and pretty easy to do it manually on Windows. 
