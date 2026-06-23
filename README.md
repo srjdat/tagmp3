@@ -1,4 +1,3 @@
-### README is AI generated so there may be errors. 
 # Spotify Local File Tagger
 
 ## What it does
@@ -6,68 +5,47 @@
 Getting customized local files to show up correctly on Spotify (with the right artist, album, and cover art) is pretty tedious and annoying on every system. This project simplifies that by downloading a track from YouTube and automatically tagging it with the metadata Spotify needs, so it shows up properly in your local files.
 
 ## Requirements
+- Python3
 
-- Python 3
-- `eyeD3` (`pip install eyeD3`)
-- A YouTube downloader (e.g. `yt-dlp`)
+## Before running the program
+Make sure you have a folder somewhere you are storing your local files for Spotify.
 
-## Setup
+## How to get started 
+1. Clone this repository
+2. Go to the directory of this project and do `pip install -r requirements.txt`
+3. Run either `python tagmp3cli.py` or `python tagmp3gui.py` depending on whether you want GUI or CLI. 
+   - This will make this script executable globally (on MacOS and Linux).
+   - You can exit the program by entering `CTRL + C` on the terminal or closing the GUI window after running it for the first time. 
+4. Run `tagmp3` from anywhere on your computer
 
-1. Create a folder named `spotify local music` on your Desktop. Update the path in the program (change `user` to your local username and keep `{input_tokens[0]}.mp3` at the end) to point to this folder.
-2. Make sure Spotify is set to show local files from this folder:
-   - Go to **Settings → Local Files**
-   - Toggle **Show Local Files** on
-   - Add your `spotify local music` folder as a source
-
-## Making it global (Linux)
-
-To run the script as a command from anywhere on your system:
-
-```bash
-chmod +x tagmp3.py
-mv tagmp3.py ~/.local/bin/tagmp3
+## Running the program
+### CLI
+After running `tagmp3` it will ask for the destination folder and then the tags.    
+Whenever there is a ">" symbol, it is for the user to type.     
+Enter all inputs in quotes.
+```
+usr % tagmp3
+Destination folder
+> "enter/path/to/folder/in/quotes"
+Title Artist Album Album_Artist Front_Cover Youtube_Link
+> "Right Now" "NewJeans" "Supernatural" "NewJeans" "path/to/front/cover.png" "https://youtu.be/m6pTbEz4w3o?si=zhu30LJmH0YauPbw"
 ```
 
-Make sure `~/.local/bin` is in your `PATH`. You can check with:
 
-```bash
-echo $PATH
-```
+### GUI
+After running `tagmp3` a GUI will pop up asking for Title, Artist, Album, Cover, Youtube Link, and Destination folder.   
+Cover and Destination will give you the abilitiy to choose your own through a dialog box (click select button to access the dialog box). 
 
-If it's not there, add this to your `~/.bashrc` (or `~/.zshrc`):
-
-```bash
-export PATH="$HOME/.local/bin:$PATH"
-```
-
-## Usage
-
-```bash
-tagmp3
-> "Artist" "Album" "Album Artist" "path/to/cover.jpg" "YouTube link"
-```
-
-**Arguments (in order):**
-
-1. **Artist**
-2. **Album**
-3. **Album Artist**
-4. **Front cover** — path to a `.jpg` image file
-5. **YouTube link** — the song to download
-
-The program downloads the audio from the YouTube link, then applies the tags and cover art automatically.
-
-> **Note:** Wrap each argument in quotes. Use spaces only — no commas, periods, or other punctuation needed to separate values, since each one is its own argument.
+![Enter all the fields freely with no need to worry about quotes](image.png)
 
 ## After running
+Go to Spotify settings and turn off and on the folder that you are using for local files. 
 
-Spotify caches local file metadata, so it won't always pick up changes automatically. To force a rescan:
+![Turn this off and on](image-1.png)
 
-1. Go to **Settings → Local Files**
-2. Toggle **Show Local Files** off, then back on (or remove and re-add the folder)
-3. Your newly tagged track should now appear with the correct metadata and cover art
+Your newly tagged track should appear with the correct metadata!
 
-## Known limitations
-
-- Spotify on Linux doesn't always display embedded cover art reliably, even when it's correctly tagged in the file. This is a Spotify client limitation, not a tagging issue.
-- New files sometimes require a manual local files toggle/rescan to appear, even after running the script.
+## Additional Information
+- Spotify sometimes doesn't show the cover art reliably on Linux
+   - This issue isn't a fault of the program, Linux doesn't have the best support for everything
+- Sometimes it will require you to turn on and off the source folder or local files in general a couple of times before this works (this is just how Spotify is). 

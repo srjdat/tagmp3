@@ -14,7 +14,6 @@ if not os.path.exists(os.path.expanduser("~/.local/bin/tagmp3")):
 else: 
     print("tagmp3 already exists")
 
-
 def download_audio(url, output_dir="Downloads"): 
     yt_dlp_opts = {
                 'format': 'bestaudio/best',
