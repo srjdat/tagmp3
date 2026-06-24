@@ -23,13 +23,13 @@ Whenever there is a ">" symbol, it is for the user to type.
 ```
 usr % tagmp3
 Destination folder
-> enter/path/to/folder/
+> /enter/path/to/folder/
 Title Artist Album Album_Artist Front_Cover Youtube_Link
-> "Right Now" "NewJeans" "Supernatural" "NewJeans" "path/to/front/cover.png" "https://youtu.be/m6pTbEz4w3o?si=zhu30LJmH0YauPbw"
+> "Right Now" "NewJeans" "Supernatural" "NewJeans" "/path/to/front/cover.png" "https://youtu.be/m6pTbEz4w3o?si=zhu30LJmH0YauPbw"
 ```
 or 
 ```
-usr % tagmp3 "enter/path/to/folder" "Right Now" "NewJeans" "Supernatural" "NewJeans" "path/to/front/cover.png" "https://youtu.be/m6pTbEz4w3o?si=zhu30LJmH0YauPbw"
+usr % tagmp3 "/enter/path/to/folder" "Right Now" "NewJeans" "Supernatural" "NewJeans" "/path/to/front/cover.png" "https://youtu.be/m6pTbEz4w3o?si=zhu30LJmH0YauPbw"
 ```
 > Note: When inputting Destination Folder separately (like in the first case), do not use quotes. When inputting Destination Folder with the other arguments (like in the second case), use quotes. 
 
