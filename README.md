@@ -49,7 +49,7 @@ Turn this off and on
 Your newly tagged track should appear with the correct metadata!
 
 ## Uninstallation
-Run `uninstall.py` to remove the script. 
+Run `python3 uninstall.py` to remove the script. 
 
 ## Additional Information
 - Spotify sometimes doesn't show the cover art reliably on Linux
