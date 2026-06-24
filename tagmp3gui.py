@@ -7,16 +7,7 @@ from tkinter import filedialog
 import yt_dlp
 import eyed3
 from eyed3.id3.frames import ImageFrame
-import os
-
-# make it global at the beginning
-filepath = os.path.abspath(__file__)
-
-if not os.path.exists(os.path.expanduser("~/.local/bin/tagmp3")):
-    os.chmod(path=filepath, mode=0o755)
-    shutil.copy(filepath, os.path.expanduser("~/.local/bin/tagmp3"))
-
-
+import os, tempfile
 
 def enter_command(): 
     # end the gui cause we're done and all the tags are stored in global variables 
@@ -30,7 +21,8 @@ def select_destination_file():
     filename = filedialog.askdirectory()
     destination.insert(0, filename)
 
-def download_audio(url, output_dir="Downloads"): 
+def download_audio(url): 
+    output_dir = tempfile.gettempdir()
     yt_dlp_opts = {
         'format': 'bestaudio/best',
         'outtmpl': f'{output_dir}/%(title)s.%(ext)s',
@@ -44,8 +36,8 @@ def download_audio(url, output_dir="Downloads"):
     with yt_dlp.YoutubeDL(yt_dlp_opts) as ydl: 
         info = ydl.extract_info(url, download=True)
         filepath = ydl.prepare_filename(info)
-        base, _ = filepath.rsplit('.', 1)
-        final_path = f'{base}.mp3'
+        base = Path(filepath).stem
+        final_path = Path(output_dir) / f'{base}.mp3'
 
     return final_path
 
@@ -106,8 +98,6 @@ def gui():
     button = ttk.Button(root, text="Enter", command=enter_command)
     button.grid(row=6, column=0, columnspan=2, pady=15)
 
-
-
     root.mainloop()
 
 def main(): 
@@ -123,7 +113,6 @@ def main():
 
     
     input_tokens[5] = download_audio(input_tokens[5])
-    print(input_tokens[5])
 
     # artist, album, album_artist, front_cover, file path
     audiofile = eyed3.load(str(input_tokens[5]))
@@ -148,10 +137,9 @@ def main():
     audiofile.tag.save() # save everything
 
     # have to figure this out
-    dest_filepath = Path(dest_str.get())
-    format = ".mp3"
-    final_path = os.path.join(dest_filepath, input_tokens[0] + format)
-    os.replace(input_tokens[5], final_path)
+    format = "mp3"
+    final_dest = Path(dest_str.get()) / f'{input_tokens[0]}.{format}'
+    shutil.move(input_tokens[5], final_dest)
 
 if __name__ == "__main__": 
     gui()

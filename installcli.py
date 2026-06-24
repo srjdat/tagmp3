@@ -45,6 +45,7 @@ def install_win32():
     if made_local_bin:
         print(f'Please add {install_dir} to your PATH')
 
+
 if sys.platform == 'win32':
     install_win32()
 elif sys.platform == 'linux' or sys.platform == 'darwin':
