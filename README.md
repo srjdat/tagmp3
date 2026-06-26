@@ -16,6 +16,13 @@ Make sure you have a folder somewhere you are storing your local files for Spoti
 3. Run `python3 installcli.py` or `python3 installgui.py` depending on whether you want CLI or GUI version. 
 4. Run `tagmp3` from anywhere on your computer
 
+## MacOS specific installation
+1. Make sure to use Homebrew python3.    
+2. Create a venv folder using `python3 -m venv .venv`.     
+3. Activate the virtual environment by using `source .venv/bin/activate`.    
+4. Add `#!/path/to/tagmp3/venv/bin/python3` to either tagmp3gui.py or tagmp3cli.py depending on what you want.   
+5. Run the installation scripts. 
+
 ## Running the program
 ### CLI
 After running `tagmp3` it will ask for the destination folder and then the tags, or you can enter all the commands after `tagmp3`    
