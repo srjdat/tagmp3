@@ -6,6 +6,7 @@ Getting customized local files to show up correctly on Spotify (with the right a
 
 ## Requirements
 - Python3
+- ffmpeg
 
 ## Before running the program
 Make sure you have a folder somewhere you are storing your local files for Spotify.
